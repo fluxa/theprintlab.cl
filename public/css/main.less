@@ -1,0 +1,76 @@
+@import 'retina-1.1.0.less';
+
+// Colors
+@pl-midnightblue: #2a2d34;
+@pl-wetasphalt: #34495e;
+@pl-asbestos: #5b6b78;
+@pl-slime: #b6ce32;
+@pl-lime: #b6ce32;
+@pl-peterrever: #5691bb;
+@pl-silver: #dfe0db;
+@pl-concrete: #95a5a6;
+@alizarin: #e74c3c;
+
+body { 
+  padding-top: 70px; 
+}
+
+.tpl-logo {
+  .at2x('../images/tpl_logo.png', 335px, 27px);
+  width: 335px;
+  height: 27px;
+  background-repeat: no-repeat;
+  margin-top: 24px;
+}
+
+.tpl-rombo {
+  width: 325px;
+  height: 325px;
+  .at2x('../images/tpl_rombo.png', 325px, 325px);
+}
+
+// Carousel slides
+.item-1 {
+  .at2x('../images/photo01.jpg', cover, cover);
+  background-size: cover;
+  height: 500px;
+}
+
+.item-2 {
+  .at2x('../images/photo02.jpg', cover, cover);
+  background-size: cover;
+  height: 500px;
+}
+
+.item-3 {
+  .at2x('../images/photo03.jpg', cover, cover);
+  background-size: cover;
+  height: 500px;
+}
+
+// Under carousel
+.container-main-text {
+  background-color: @pl-silver;
+  height: 100px;
+}
+
+.main-text {
+  padding-top: 20px;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.container-info {
+  background-color: @pl-concrete;
+  height: 200px;
+}
+
+.silver-triangle {
+  .at2x('../images/silver_triangle.png', 17px, 15px);
+  width: 17px;
+  height: 15px;
+  margin-left: 50%;
+}

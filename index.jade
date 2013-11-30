@@ -1,0 +1,21 @@
+!= partial('_navbar')
+.container-main
+	.carousel.slide(data-ride='carousel')#myCarousel
+		ol.carousel-indicators
+			li(data-target='#myCarousel' data-slide-to='0').active
+			li(data-target='#myCarousel' data-slide-to='1')
+			li(data-target='#myCarousel' data-slide-to='2')
+		.carousel-inner
+			.item.item-1.active
+			.item.item-2
+			.item.item-3
+.container-main-text
+	.container
+		.main-text LA FORMA MÁS SENCILLA DE IMPRIMIR TUS FOTOS DESDE TU IPHONE Y RECIBIRLAS POR CORREO IMPRESAS EN PAPEL FOTOGRÁFICO EN LA PUERTA DE TU CASA
+.container-info
+	.silver-triangle
+!= partial('_scripts')
+script.
+	$('.carousel').carousel({
+		interval: 3500
+	});
