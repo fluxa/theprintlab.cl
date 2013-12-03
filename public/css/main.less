@@ -15,6 +15,21 @@ body {
   padding-top: 70px; 
 }
 
+// Navbar
+.tpl-navbar {
+  background-color: rgba(255,255,255,0.8);
+}
+
+.navbar .nav > li > a {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.navbar .nav > li > a:hover,
+.navbar .nav > li > a:focus {
+  color: @pl-slime;
+}
+
 .tpl-logo {
   .at2x('../images/tpl_logo.png', 335px, 27px);
   width: 335px;
@@ -72,5 +87,61 @@ body {
   .at2x('../images/silver_triangle.png', 17px, 15px);
   width: 17px;
   height: 15px;
-  margin-left: 50%;
+  margin: 0 auto;
 }
+
+// Prints info
+.tpl-perfect {
+  .at2x('../images/perfect.png', 283px, 30px);
+  width: 283px;
+  height: 30px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.info-text {
+  padding-top: 14px;
+  color: @pl-silver;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 26px;
+  text-align: center;
+}
+
+// PreFooter
+.container-pre-footer {
+  height: 380px;
+  color: @pl-silver;
+  font-weight: 300;
+  font-size: 20px;
+  text-align: center;
+}
+
+.tpl-flor {
+  .at2x('../images/tpl_flor.jpg', 200px, 200px);
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.appstore-badge {
+  background-image: url('../images/appstore_badge.svg');
+  width: 135px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+// Footer
+.container-footer{
+  height: 80px;
+  background-color: @pl-midnightblue;
+  padding-top: 30px;
+  color: @pl-silver;
+}
+

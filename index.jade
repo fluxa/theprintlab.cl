@@ -11,9 +11,19 @@
 			.item.item-3
 .container-main-text
 	.container
-		.main-text LA FORMA MÁS SENCILLA DE IMPRIMIR TUS FOTOS DESDE TU IPHONE Y RECIBIRLAS POR CORREO IMPRESAS EN PAPEL FOTOGRÁFICO EN LA PUERTA DE TU CASA
+		.main-text #{main_text}
 .container-info
-	.silver-triangle
+	.container
+		.silver-triangle
+		.tpl-perfect
+		.info-text #{info_text}
+.container-pre-footer
+	.container
+		.tpl-flor
+		span #{public._data.punch}
+		a(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4')
+			.appstore-badge
+!= partial('_footer')
 != partial('_scripts')
 script.
 	$('.carousel').carousel({
