@@ -1,31 +1,44 @@
 != partial('_navbar')
-.container-main
-	.carousel.slide(data-ride='carousel')#myCarousel
-		ol.carousel-indicators
-			li(data-target='#myCarousel' data-slide-to='0').active
-			li(data-target='#myCarousel' data-slide-to='1')
-			li(data-target='#myCarousel' data-slide-to='2')
-		.carousel-inner
-			.item.item-1.active
-			.item.item-2
-			.item.item-3
-.container-main-text
-	.container
-		.main-text #{main_text}
-.container-info
-	.container
-		.silver-triangle
-		.tpl-perfect
-		.info-text #{info_text}
-.container-pre-footer
-	.container
-		.tpl-flor
-		span #{public._data.punch}
-		a(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4')
+.container-fluid
+	.visible-lg.visible-md
+		.carousel.slide(data-ride='carousel')#myCarousel
+			ol.carousel-indicators
+				li(data-target='#myCarousel' data-slide-to='0').active
+				li(data-target='#myCarousel' data-slide-to='1')
+				li(data-target='#myCarousel' data-slide-to='2')
+			.carousel-inner
+				.item.item-1.active
+				.item.item-2
+				.item.item-3
+
+	.hidden-lg.hidden-md
+		.carousel.slide(data-ride='carousel')#myCarousel2
+			ol.carousel-indicators
+				li(data-target='#myCarousel2' data-slide-to='0').active
+				li(data-target='#myCarousel2' data-slide-to='1')
+				li(data-target='#myCarousel2' data-slide-to='2')
+			.carousel-inner
+				.item.item-1-xs.active
+				.item.item-2-xs
+				.item.item-3-xs
+.container-fluid.tpl-cont-pri
+	.tpl-logo-bg.visible-sm
+	p #{main_text}
+.container-fluid.tpl-cont-info
+	.silver-triangle
+	.tpl-perfect
+	p #{info_text}
+.container-fluid.tpl-cont-links
+	.tpl-flor
+	p #{public._data.punch}
+	a(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4')
 			.appstore-badge
 != partial('_footer')
 != partial('_scripts')
 script.
-	$('.carousel').carousel({
-		interval: 3500
+	$(function(){
+		$('.carousel').carousel({
+			interval: 3500,
+			pause: false
+		});
 	});

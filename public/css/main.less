@@ -11,31 +11,44 @@
 @pl-concrete: #95a5a6;
 @alizarin: #e74c3c;
 
-body { 
-  padding-top: 70px; 
+@grid-float-breakpoint: 1200px;
+
+body {
+  padding-top: 70px;
 }
 
-// Navbar
-.tpl-navbar {
-  background-color: rgba(255,255,255,0.8);
+// Images
+.tpl-flor {
+  .at2x('../images/tpl_flor.gif', 400px, 400px);
+  background-repeat: no-repeat;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
 }
 
-.navbar .nav > li > a {
-  font-weight: 300;
-  font-size: 18px;
-}
-
-.navbar .nav > li > a:hover,
-.navbar .nav > li > a:focus {
-  color: @pl-slime;
+.tpl-flor-sm {
+  .at2x('../images/tpl_flor_sm.gif', 55px, 55px);
+  background-repeat: no-repeat;
+  width: 55px;
+  height: 55px;
+  margin: 0 auto;
 }
 
 .tpl-logo {
-  .at2x('../images/tpl_logo.png', 335px, 27px);
-  width: 335px;
-  height: 27px;
+  .at2x('../images/tpl_logo.png', 214px, 20px);
+  width: 214px;
+  height: 20px;
   background-repeat: no-repeat;
-  margin-top: 24px;
+  margin-top: 6px;
+  margin: 0 auto;
+}
+
+.tpl-logo-bg {
+  .at2x('../images/tpl_logo_bg.gif', 768px, 132px);
+  width: 768px;
+  height: 132px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
 }
 
 .tpl-rombo {
@@ -44,11 +57,85 @@ body {
   .at2x('../images/tpl_rombo.png', 325px, 325px);
 }
 
-// Carousel slides
+// Navbar
+.tpl-navbar {
+  background-color: rgba(255,255,255,0.8);
+  height: 70px;
+  padding-top: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.navbar .nav > li > a {
+  font-weight: 300;
+  font-size: 1.4em;
+}
+
+
+@media (max-width: 768px) {
+  .tpl-navbar {
+    background-color: white;
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+    padding-top: 80px;
+  }
+  .tpl-navbar {
+    background-color: white;
+    height: 80px;
+    padding-top: 12px;
+  }
+
+  .navbar .nav > li > a {
+    font-weight: 300;
+    font-size: 2.5em;
+  }
+
+}
+
+
+.tpl-nav-base {
+  margin-right: 6px;
+}
+
+.tpl-pri {
+  .tpl-nav-base
+}
+
+.tpl-pri > a {
+  color: @pl-silver;
+  background-color: @pl-wetasphalt;
+}
+
+.tpl-pri > a:hover,
+.tpl-pri > a:focus {
+  color: @pl-lime !important;
+  background-color: @pl-wetasphalt !important;
+}
+
+.tpl-sec {
+  .tpl-nav-base;
+}
+
+.tpl-sec > a {
+  color: @pl-wetasphalt;
+  background-color: @pl-silver;
+}
+
+.tpl-sec > a:hover,
+.tpl-sec > a:focus {
+  color: @pl-lime !important;
+  background-color: @pl-silver !important;
+}
+
+
+// Carousel slides lg + md + sm
 .item-1 {
   .at2x('../images/photo01.jpg', cover, cover);
   background-size: cover;
-  height: 500px;
+  height: 500px
 }
 
 .item-2 {
@@ -63,24 +150,44 @@ body {
   height: 500px;
 }
 
-// Under carousel
-.container-main-text {
-  background-color: @pl-silver;
-  height: 100px;
+// Carousel slides xs
+.item-1-xs {
+  .at2x('../images/photo01_xs.jpg', cover, cover);
+  background-size: cover;
+  height: 700px;
 }
 
-.main-text {
-  padding-top: 20px;
+.item-2-xs {
+  .at2x('../images/photo02_xs.jpg', cover, cover);
+  background-size: cover;
+  height: 700px;
+}
+
+.item-3-xs {
+  .at2x('../images/photo03_xs.jpg', cover, cover);
+  background-size: cover;
+  height: 700px;
+}
+
+
+// Under carousel
+.tpl-cont-pri {
+  background-color: @pl-silver;
+  margin-top: 16px;
+}
+
+.tpl-cont-pri > p {
+  padding: 20px 0px;
   font-weight: 300;
   font-style: normal;
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 1.5em;
+  line-height: 1.2em;
   text-align: center;
 }
 
-.container-info {
+// Prints info
+.tpl-cont-info {
   background-color: @pl-concrete;
-  height: 200px;
 }
 
 .silver-triangle {
@@ -90,7 +197,6 @@ body {
   margin: 0 auto;
 }
 
-// Prints info
 .tpl-perfect {
   .at2x('../images/perfect.png', 283px, 30px);
   width: 283px;
@@ -99,34 +205,23 @@ body {
   margin-top: 30px;
 }
 
-.info-text {
-  padding-top: 14px;
+.tpl-cont-info > p {
   color: @pl-silver;
   font-weight: 300;
   font-style: normal;
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 1.2em;
+  line-height: 1.2em;
   text-align: center;
 }
 
 // PreFooter
-.container-pre-footer {
-  height: 380px;
-  color: @pl-silver;
+.tpl-cont-links > p {
+  color: @pl-wetasphalt;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 1.2em;
   text-align: center;
 }
 
-.tpl-flor {
-  .at2x('../images/tpl_flor.jpg', 200px, 200px);
-  background-repeat: no-repeat;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-  margin-top: 50px;
-  margin-bottom: 30px;
-}
 
 .appstore-badge {
   background-image: url('../images/appstore_badge.svg');
@@ -138,10 +233,13 @@ body {
 }
 
 // Footer
-.container-footer{
-  height: 80px;
+.tpl-cont-footer{
   background-color: @pl-midnightblue;
   padding-top: 30px;
-  color: @pl-silver;
 }
 
+.tpl-cont-footer > p {
+  color: @pl-silver;
+  font-weight: 300;
+  font-size: 1.0em;
+}
