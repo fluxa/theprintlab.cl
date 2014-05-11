@@ -57,6 +57,13 @@ body {
   .at2x('../images/tpl_rombo.png', 325px, 325px);
 }
 
+.silver-triangle {
+  .at2x('../images/silver_triangle.png', 17px, 15px);
+  width: 17px;
+  height: 15px;
+  margin: 0 auto;
+}
+
 // Navbar
 .tpl-navbar {
   background-color: rgba(255,255,255,0.8);
@@ -70,31 +77,6 @@ body {
   font-weight: 300;
   font-size: 1.4em;
 }
-
-
-@media (max-width: 768px) {
-  .tpl-navbar {
-    background-color: white;
-  }
-}
-
-@media (max-width: 992px) {
-  body {
-    padding-top: 80px;
-  }
-  .tpl-navbar {
-    background-color: white;
-    height: 80px;
-    padding-top: 12px;
-  }
-
-  .navbar .nav > li > a {
-    font-weight: 300;
-    font-size: 2.5em;
-  }
-
-}
-
 
 .tpl-nav-base {
   margin-right: 6px;
@@ -169,15 +151,9 @@ body {
   height: 700px;
 }
 
-
-// Under carousel
-.tpl-cont-pri {
-  background-color: @pl-silver;
-  margin-top: 16px;
-}
-
-.tpl-cont-pri > p {
-  padding: 20px 0px;
+// Text Styles
+.txt-main {
+  color: @pl-wetasphalt;
   font-weight: 300;
   font-style: normal;
   font-size: 1.5em;
@@ -185,33 +161,64 @@ body {
   text-align: center;
 }
 
-// Prints info
-.tpl-cont-info {
-  background-color: @pl-concrete;
-}
-
-.silver-triangle {
-  .at2x('../images/silver_triangle.png', 17px, 15px);
-  width: 17px;
-  height: 15px;
-  margin: 0 auto;
-}
-
-.tpl-perfect {
-  .at2x('../images/perfect.png', 283px, 30px);
-  width: 283px;
-  height: 30px;
-  margin: 0 auto;
-  margin-top: 30px;
-}
-
-.tpl-cont-info > p {
+.txt-info {
   color: @pl-silver;
   font-weight: 300;
   font-style: normal;
   font-size: 1.2em;
   line-height: 1.2em;
   text-align: center;
+}
+
+// Under carousel
+.tpl-cont-download {
+    background-color: @pl-lime;
+    margin-top: 16px;
+    padding: 40px;
+    text-align: center;
+}
+
+.tpl-cont-download > p {
+  .txt-main;
+  font-weight: 400;
+}
+
+.tpl-cont-download > p > span {
+  .txt-main;
+  font-weight: 300;
+  font-size: 1.0em;
+}
+
+.app-link > img {
+  height: 3em;
+  margin: 0 auto;
+}
+
+.tpl-cont-pri {
+  background-color: @pl-silver;
+  padding: 40px 80px;
+}
+
+.tpl-cont-pri > p {
+  .txt-main
+}
+
+// Prints info
+.tpl-cont-info {
+  background-color: @pl-concrete;
+  text-align: center;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 30px;
+}
+
+.perfect {
+  height: 2.0em;
+  margin: 20px 0px;
+}
+
+.tpl-cont-info > p {
+  .txt-info
 }
 
 // PreFooter
@@ -223,15 +230,6 @@ body {
 }
 
 
-.appstore-badge {
-  background-image: url('../images/appstore_badge.svg');
-  width: 135px;
-  height: 40px;
-  margin: 0 auto;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
 // Footer
 .tpl-cont-footer{
   background-color: @pl-midnightblue;
@@ -242,4 +240,32 @@ body {
   color: @pl-silver;
   font-weight: 300;
   font-size: 1.0em;
+}
+
+// Media Queries
+@media (max-width: 768px) {
+  .tpl-navbar {
+    background-color: white;
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+    padding-top: 80px;
+  }
+  .tpl-navbar {
+    background-color: white;
+    height: 80px;
+    padding-top: 12px;
+  }
+
+  .navbar .nav > li > a {
+    font-weight: 300;
+    font-size: 2.5em;
+  }
+
+  .app-link > img {
+    height: 4em;
+  }
+
 }
