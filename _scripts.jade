@@ -1,2 +1,29 @@
 script(src='/public/js/jquery-1.10.2.min.js')
 script(src='/public/bootstrap/js/bootstrap.min.js')
+script.
+  $(function() {
+
+    var scrollToAnchor = function( id ) {
+      var elem = $("a[name='"+ id +"']");
+
+      if ( typeof( elem.offset() ) === "undefined" ) {
+        elem = $("#"+id);
+      }
+
+      if ( typeof( elem.offset() ) !== "undefined" ) {
+        $('html, body').animate({
+          scrollTop: elem.offset().top
+        }, 1000 );
+
+      }
+    };
+
+    $("a").click(function( event ) {
+      if ( $(this).attr("href").match("#") ) {
+        event.preventDefault();
+        var href = $(this).attr('href').replace('#', '')
+        scrollToAnchor( href );
+      }
+    });
+
+  });

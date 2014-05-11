@@ -1,0 +1,36 @@
+nav.navbar.navbar-fixed-top.tpl-navbar-inverse(role='navigation')
+  .container
+    .navbar-header
+      a.navbar-brand(href='/')
+        .tpl-logo-inverse
+
+.container
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        h3 Ya hice el pago y quiero mis fotos!
+        span Si ya hiciste el pago por transferencia bancaria, envíanos los datos de la transferencia para continuar con tu pedido
+    .panel-body
+      form
+        .form-group
+          .input-group
+            span.input-group-addon Pedido
+            input.form-control.input-hg(type='text', value='XXXXXXXXXXXXXXXXXXXX',disabled)
+        .form-group
+          .input-group
+            span.input-group-addon Total 
+            input.form-control.input-hg(type='text', value='6700',disabled)
+        .form-group
+          .input-group
+            span.input-group-addon Info
+            input.form-control.input-hg(type='text', value='20 impresiones en mate con borde blanco',disabled)
+        .form-group
+          input.form-control.input-hg(type='text', placeholder='Tu Nombre')
+        .form-group
+          input.form-control.input-hg(type='text', placeholder='Tu Apellido')
+        .form-group
+          textarea.form-control.input-hg(rows='10', placeholder='Información sobre la transferencia: Banco, Número de transacción, Fecha, etc')
+    .panel-footer
+      button.btn.btn-primary.btn-hg.btn-embossed ENVIAR
+!= partial('_footer')
+!= partial('_scripts')
