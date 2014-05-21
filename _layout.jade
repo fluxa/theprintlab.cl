@@ -2,10 +2,15 @@ doctype html
 html
 	head
 		title #{public._data.title}
-		meta(name='apple-itunes-app' content='app-id=670160214')
+		if smartbanner
+			meta(name='apple-itunes-app' content='app-id=670160214')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 		link(rel='icon' type='image/ico' href='/public/images/favicon.ico')
 		link(rel='stylesheet', href='/public/bootstrap/css/bootstrap.min.css')
 		link(rel='stylesheet', href='/public/css/flat-ui.css')
+		link(rel='stylesheet', href='/public/css/bootstrap-select.min.css')
 		link(rel='stylesheet', href='/public/css/main.css')
+		link(rel='stylesheet', href='/public/css/default.css')
+		link(rel='stylesheet', href='/public/css/default.date.css')
 	body
 		!= yield

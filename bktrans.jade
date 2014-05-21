@@ -1,0 +1,60 @@
+nav.navbar.navbar-fixed-top.tpl-navbar-inverse(role='navigation')
+  .container
+    .navbar-header
+      a.navbar-brand(href='/')
+        .tpl-logo-inverse
+
+.container
+  .panel.panel-default
+    .panel-heading
+      .panel-title
+        h3 Ya hice el pago y quiero mis fotos!
+        span Si ya hiciste el pago por transferencia bancaria, envíanos los datos de la transferencia para continuar con tu pedido
+    .panel-body
+      form
+        .form-group
+          label Pedido Número
+          input.form-control.input-hg(type='text', value='XXXXXXXXXXXXXXXXXXXX',disabled)
+
+        .form-group
+          label Total
+          .input-group
+            span.input-group-addon $
+            input.form-control.input-hg(type='text', value='6700',disabled)
+
+        .form-group
+          label Info
+          textarea.form-control.input-hg(rows='4',disabled)
+            | 20 impresiones en mate con borde blanco
+
+        .form-group.visible-md.visible-lg
+          label Seleccionar Banco
+          select.select-block.mbl(name='banco')#select_bank
+            option(selected) Seleccionar Banco
+            for bank in banks
+              option(value='#{bank}') #{bank}
+
+        .form-group.hidden-md.hidden-lg
+          select.input-hg.form-control(name='banco', placeholder='Seleccionar Banco ...')
+            option(default, selected) Seleccionar Banco
+            for bank in banks
+              option(value='#{bank}') #{bank}
+
+        .form-group
+          label Nombre del titular de la cuenta
+          input.form-control.input-hg(type='text', placeholder='Nombre del Titular', name='nombre')
+
+        .form-group
+          label Fecha de la transferencia
+          input.form-control.input-hg(type='text', placeholder='Seleccionar Fecha ...' name='date')#select_date
+    .panel-footer
+      button.btn.btn-primary.btn-hg.btn-embossed CONFIRMAR
+!= partial('_footer')
+!= partial('_scripts')
+script.
+  $(function(){
+    $('#select_bank').selectpicker({style:'btn-hg btn-primary', menuStyle:'dropdown-inverse'});
+    $('#select_date').pickadate();
+
+
+  });
