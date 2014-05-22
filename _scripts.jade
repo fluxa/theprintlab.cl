@@ -5,6 +5,9 @@ script(src='/public/js/bootstrap-select.js')
 script(src='/public/js/picker.js');
 script(src='/public/js/picker.date.js');
 script.
+
+  var spinner_is_animating = false;
+
   $(function() {
 
     var scrollToAnchor = function( id ) {
@@ -31,3 +34,22 @@ script.
     });
 
   });
+
+  function spinner(on) {
+    var lc = $('#spinner-container')[0];
+    if(on) {
+      if(spinner_is_animating) {
+        return;
+      }
+      spinner_is_animating = true;
+      var prev = document.createElement('div');
+      $(prev).addClass('spinner-previewer');
+      var lo = document.createElement('div');
+      $(lo).addClass('spinner-loading');
+      prev.appendChild(lo);
+      lc.appendChild(prev);
+    } else {
+      lc.innerHTML = '';
+      spinner_is_animating = false;
+    }
+  }

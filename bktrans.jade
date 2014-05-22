@@ -11,50 +11,84 @@ nav.navbar.navbar-fixed-top.tpl-navbar-inverse(role='navigation')
         h3 Ya hice el pago y quiero mis fotos!
         span Si ya hiciste el pago por transferencia bancaria, envíanos los datos de la transferencia para continuar con tu pedido
     .panel-body
-      form
+      form#confirm_form
         .form-group
           label Pedido Número
-          input.form-control.input-hg(type='text', value='XXXXXXXXXXXXXXXXXXXX',disabled)
+          input.form-control.input-hg(type='text', value='',disabled)#_order_id
 
         .form-group
           label Total
           .input-group
             span.input-group-addon $
-            input.form-control.input-hg(type='text', value='6700',disabled)
+            input.form-control.input-hg(type='text', value='',disabled)#_order_total
 
         .form-group
           label Info
-          textarea.form-control.input-hg(rows='4',disabled)
-            | 20 impresiones en mate con borde blanco
+          textarea.form-control.input-hg(rows='4',disabled)#_order_info
 
         .form-group.visible-md.visible-lg
           label Seleccionar Banco
-          select.select-block.mbl(name='banco')#select_bank
+          select.select-block.mbl(name='banco', required)#select_bank
             option(selected) Seleccionar Banco
             for bank in banks
               option(value='#{bank}') #{bank}
 
         .form-group.hidden-md.hidden-lg
-          select.input-hg.form-control(name='banco', placeholder='Seleccionar Banco ...')
+          select.input-hg.form-control(name='banco', placeholder='Seleccionar Banco ...', required)
             option(default, selected) Seleccionar Banco
             for bank in banks
               option(value='#{bank}') #{bank}
 
         .form-group
           label Nombre del titular de la cuenta
-          input.form-control.input-hg(type='text', placeholder='Nombre del Titular', name='nombre')
+          input.form-control.input-hg(type='text', placeholder='Nombre del Titular', name='nombre', required)
 
         .form-group
           label Fecha de la transferencia
-          input.form-control.input-hg(type='text', placeholder='Seleccionar Fecha ...' name='date')#select_date
+          input.form-control.input-hg(type='text', placeholder='Seleccionar Fecha ...' name='date', required)#select_date
+
+        input(type='hidden', name='order_id')#order_id
     .panel-footer
-      button.btn.btn-primary.btn-hg.btn-embossed CONFIRMAR
+      button.btn.btn-primary.btn-hg.btn-embossed(onclick='submit()') CONFIRMAR
+div#spinner-container
 != partial('_footer')
 != partial('_scripts')
 script.
+  var api_url = 'http://localhost:5006/v1/';
   $(function(){
     $('#select_bank').selectpicker({style:'btn-hg btn-primary', menuStyle:'dropdown-inverse'});
     $('#select_date').pickadate();
 
+    var order_id;
+    try{
+      order_id = window.location.href.match(/order_id=[0-9a-zA-Z]*/)[0].split('=')[1];
+    }catch(e) {
+
+    }
+
+    if(order_id && order_id.length === 24) {
+      // Get order_id info
+      spinner(true);
+      var url = api_url + 'orders/get/' + order_id;
+      $.get(url, function(data) {
+        if(data && data.order) {
+          prefill(data.order);
+        }
+        spinner(false);
+      });
+    } else {
+      alert('no order id found');
+    }
 
   });
+
+  function prefill(order) {
+    $('#_order_id').val(order._id);
+    $('#order_id').val(order._id);
+    $('#_order_total').val(order.cost_total);
+    $('#_order_info').val(order.photo_count + ' impresiones papel mate con borde blanco');
+  }
+
+  function submit() {
+    $('#confirm_form');
+  }
