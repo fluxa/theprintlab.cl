@@ -1,26 +1,31 @@
 != partial('_navbar')
 .container-fluid
-	.visible-lg.visible-md
-		.carousel.slide(data-ride='carousel')#myCarousel
-			ol.carousel-indicators
-				li(data-target='#myCarousel' data-slide-to='0').active
-				li(data-target='#myCarousel' data-slide-to='1')
-				li(data-target='#myCarousel' data-slide-to='2')
-			.carousel-inner
-				.item.item-1.active
-				.item.item-2
-				.item.item-3
 
-	.hidden-lg.hidden-md
-		.carousel.slide(data-ride='carousel')#myCarousel2
-			ol.carousel-indicators
-				li(data-target='#myCarousel2' data-slide-to='0').active
-				li(data-target='#myCarousel2' data-slide-to='1')
-				li(data-target='#myCarousel2' data-slide-to='2')
-			.carousel-inner
-				.item.item-1-xs.active
-				.item.item-2-xs
-				.item.item-3-xs
+	.swipe.hidden-xs#swipe-desktop
+		.swipe-wrap
+			.slide
+				img(src='/public/images/photo01.jpg')
+			.slide
+				img(src='/public/images/photo02.jpg')
+			.slide
+				img(src='/public/images/photo03.jpg')
+
+	.swipe.visible-xs#swipe-mobile
+		.swipe-wrap
+			.slide
+				img(src='/public/images/photo01_xs.jpg')
+			.slide
+				img(src='/public/images/photo02_xs.jpg')
+			.slide
+				img(src='/public/images/photo03_xs.jpg')
+
+.container-fluid
+	.swipe-counter
+		ul
+			li.active
+			li
+			li
+
 .container-fluid.tpl-cont-download
 	p
 		| IMPRIME FOTOS DIRECTO DESDE TU SMARTPHONE <br>
@@ -37,7 +42,8 @@
 	img.perfect(src='./public/images/perfect@2x.png')
 	p #{info_text}
 .container-fluid.tpl-cont-links
-	.tpl-flor
+	.tpl-flor-hg.hidden-xs
+	.tpl-flor-md.visible-xs
 	p #{public._data.punch}
 	a(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4')
 			.appstore-badge
@@ -45,8 +51,36 @@
 != partial('_scripts')
 script.
 	$(function(){
-		$('.carousel').carousel({
-			interval: 3500,
-			pause: false
+		var swipe_pos = $('.swipe-counter > ul > li');
+		var swipe_options = function() {
+			return {
+				startSlide: 0,
+				speed: 400,
+				auto: 5000,
+				continuous: true,
+				disableScroll: false,
+				stopPropagation: false,
+				callback: function(index, elem) {
+					for(var i=0; i<swipe_pos.length;i++) {
+						$(swipe_pos[i]).removeClass('active');
+					}
+					$(swipe_pos[index]).addClass('active');
+				},
+				transitionEnd: function(index, elem) {}
+			}
+		}
+
+		if($('#swipe-desktop').is(':visible')) {
+			window.my_swipe = $('#swipe-desktop').Swipe(swipe_options()).data('Swipe');
+		} else {
+			window.my_swipe = $('#swipe-mobile').Swipe(swipe_options()).data('Swipe');
+		}
+
+
+		swipe_pos.on('click', function(event){
+			event.preventDefault();
+			var index = swipe_pos.index(event.currentTarget);
+			window.my_swipe.slide(index);
 		});
+
 	});

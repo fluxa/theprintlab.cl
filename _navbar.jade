@@ -1,9 +1,8 @@
-nav.navbar.navbar-fixed-top.tpl-navbar(role='navigation')
+nav.navbar.navbar-fixed-top.navbar-inverse(role='navigation')
 	.container-fluid
 		.navbar-header
-			a.navbar-brand(href='/').hidden-sm
-				.tpl-logo
-			.navbar-brand.tpl-flor-sm(style='margin-left:1px;').visible-sm
+			a.navbar-brand(href='/')
+				.tpl-logo-inverse
 			button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-collapse')
 				span.sr-only Menu
 				span.icon-bar
@@ -11,10 +10,8 @@ nav.navbar.navbar-fixed-top.tpl-navbar(role='navigation')
 				span.icon-bar
 
 		.collapse.navbar-collapse#navbar-collapse
-			ul.nav.navbar-nav.navbar-right
-				li.tpl-pri
-					a.btn.btn-primary.btn-embossed(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4') DESCARGAR
-				li.tpl-sec
-					a.btn.btn-primary.btn-embossed(href='#print') IMPRESIONES
-				//- li.tpl-sec
-				//- 	a.btn.btn-primary.btn-embossed(href='#') FAQ
+			ul.nav.navbar-nav
+				li.active
+					a(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4',target='_blank') DESCARGAR
+				li
+					a(href='#print') IMPRESIONES

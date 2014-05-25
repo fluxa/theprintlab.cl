@@ -1,11 +1,12 @@
-nav.navbar.navbar-fixed-top.tpl-navbar-inverse(role='navigation')
+nav.navbar.navbar-fixed-top.navbar-inverse(role='navigation')
   .container
     .navbar-header
       a.navbar-brand(href='/')
         .tpl-logo-inverse
 
 .container
-  .panel.panel-default
+  //- MAIN PANEL
+  .panel.panel-default.hidden#main_panel
     .panel-heading
       .panel-title
         h3 Ya hice el pago y quiero mis fotos!
@@ -13,82 +14,206 @@ nav.navbar.navbar-fixed-top.tpl-navbar-inverse(role='navigation')
     .panel-body
       form#confirm_form
         .form-group
-          label Pedido Número
-          input.form-control.input-hg(type='text', value='',disabled)#_order_id
-
-        .form-group
-          label Total
-          .input-group
-            span.input-group-addon $
-            input.form-control.input-hg(type='text', value='',disabled)#_order_total
-
-        .form-group
-          label Info
-          textarea.form-control.input-hg(rows='4',disabled)#_order_info
-
-        .form-group.visible-md.visible-lg
-          label Seleccionar Banco
-          select.select-block.mbl(name='banco', required)#select_bank
-            option(selected) Seleccionar Banco
-            for bank in banks
-              option(value='#{bank}') #{bank}
-
-        .form-group.hidden-md.hidden-lg
-          select.input-hg.form-control(name='banco', placeholder='Seleccionar Banco ...', required)
-            option(default, selected) Seleccionar Banco
+          select.input-hg.form-control(name='bank', placeholder='Seleccionar Banco ...', required)#select_bank
+            option(value='0', default, selected) Seleccionar Banco
             for bank in banks
               option(value='#{bank}') #{bank}
 
         .form-group
           label Nombre del titular de la cuenta
-          input.form-control.input-hg(type='text', placeholder='Nombre del Titular', name='nombre', required)
+          input.form-control.input-hg(type='text', placeholder='Nombre del Titular', name='name', required)#select_name
 
         .form-group
           label Fecha de la transferencia
-          input.form-control.input-hg(type='text', placeholder='Seleccionar Fecha ...' name='date', required)#select_date
+          input.form-control.input-hg(type='text', placeholder='Seleccionar Fecha ...',name='date', required)#select_date
+
+        // PREFILLED
+        .form-group
+          label Pedido Número
+          div.well
+            small#_order_id
+
+        .form-group
+          label Total
+          div.well#_order_total
+
+        .form-group
+          label Información sobre el Pedido
+          div.well(style='white-space: pre-line;')#_order_info
 
         input(type='hidden', name='order_id')#order_id
     .panel-footer
       button.btn.btn-primary.btn-hg.btn-embossed(onclick='submit()') CONFIRMAR
+
+  //- THANK YOU PANEL
+  .panel.panel-default.hidden#thanks_panel
+    .panel-heading
+      .panel-title
+        h3 Gracias por usar ThePrintlab!
+        span Ya hemos recibido tus datos de la transferencia bancaria
+    .panel-body
+      p
+        span Pronto recibirás un email de confirmación con los datos que ingresaste sobre la transferencia bancaria. Una vez que hayamos hecho la comprobación con nuestro banco, te enviaremos otro email de confirmación y continuaremos procesando tu pedido.
+      p Si tienes cualquier consulta, no dudes de contactarnos a nuestro email
+        a(href='mailto:hola@theprintlab.cl')  hola@theprintlab.cl
+      p
+        small La comprobación de la transferencia puede tardar entre 2 a 3 días hábiles.
+
+  //- ERROR PANEL
+  .panel.panel-default.hidden#error_panel
+    .panel-heading
+      .panel-title
+        h3 No hemos encontrado tu pedido
+    .panel-body
+      span Recuerda que debes hacer click en el link que se encuentra en el mail de confirmación que te enviamos.
+      p Si tienes cualquier consulta, no dudes de contactarnos a nuestro email
+        a(href='mailto:hola@theprintlab.cl')  hola@theprintlab.cl
+
 div#spinner-container
 != partial('_footer')
 != partial('_scripts')
 script.
-  var api_url = 'http://localhost:5006/v1/';
-  $(function(){
-    $('#select_bank').selectpicker({style:'btn-hg btn-primary', menuStyle:'dropdown-inverse'});
-    $('#select_date').pickadate();
 
-    var order_id;
+  // Define API URL for environments
+  var api_url_dict = {
+    test: 'http://192.168.1.7:5006/v1/',
+    development: 'http://api-dev.theprintlab.cl/v1/',
+    production: 'http://api.theprintlab.cl/v1/'
+  }
+
+  var order_id;
+  var api_url;
+
+  $(function(){
+
+    // Initial states
+    $('.hidden').hide().removeClass('hidden');
+
+    $('#select_date').pickadate({
+      format: 'd mmmm, yyyy',
+      formatSubmit: 'yyyy-mm-dd',
+      hiddenName: true
+    });
+
     try{
       order_id = window.location.href.match(/order_id=[0-9a-zA-Z]*/)[0].split('=')[1];
+      var env = window.location.href.match(/env=[a-z]*/)[0].split('=')[1];
+      api_url = api_url_dict[env];
     }catch(e) {
 
     }
 
-    if(order_id && order_id.length === 24) {
+    if(order_id && order_id.length === 24 && api_url) {
       // Get order_id info
       spinner(true);
       var url = api_url + 'orders/get/' + order_id;
+      console.log(url);
       $.get(url, function(data) {
         if(data && data.order) {
           prefill(data.order);
+        } else {
+          show_result('no data');
         }
+      })
+      .done(function(){
+        console.log('done');
+      })
+      .fail(function() {
+        show_result('request failed');
+      })
+      .always(function() {
         spinner(false);
       });
     } else {
-      alert('no order id found');
+      show_result('missing params');
     }
 
   });
 
   function prefill(order) {
-    $('#_order_id').val(order._id);
     $('#order_id').val(order._id);
-    $('#_order_total').val(order.cost_total);
-    $('#_order_info').val(order.photo_count + ' impresiones papel mate con borde blanco');
+    $('#_order_id')[0].innerHTML = order._id;
+    $('#_order_total')[0].innerHTML = '$'  + order.cost_total;
+    $('#_order_info')[0].innerHTML = order.verbose;
+    $('#main_panel').fadeIn(500);
   }
 
-  function submit() {
-    $('#confirm_form');
+  function show_result(err, result) {
+    $('.panel').hide();
+    $('html,body').animate({scrollTop: 0});
+    if(!err) {
+      $('#thanks_panel').fadeIn(500);
+    } else {
+      console.log(err);
+      $('#error_panel').fadeIn(500);
+    }
+
   }
+
+
+
+
+  function submit() {
+    // Validate
+    var bank = $('#select_bank');
+    var name = $('#select_name');
+    var date = $('#select_date');
+    var obj = form_array_to_object($('#confirm_form').serializeArray());
+    console.log(obj);
+    if(obj.bank !== '0') {
+      if(obj.name !== '') {
+        if(obj.date) {
+          spinner(true);
+          var url = api_url + 'order/' + obj.order_id + '/payment/offline/confirmation';
+          console.log('post to url => %s',url);
+          $.post(url,obj,function(data) {
+            if(data.success) {
+              show_result(null);
+            } else {
+              show_result(data.err);
+            }
+          })
+          .done(function() {
+            console.log('done');
+          })
+          .fail(function() {
+            console.log('fail');
+            show_result('request failed');
+          })
+          .always(function() {
+            spinner(false);
+          });
+
+        } else {
+          alert('Por favor selecciona la fecha en que hiciste la transferencia');
+          $('html,body').animate({scrollTop: Number(date.offset().top-100)});
+          date.focus();
+        }
+      } else {
+        alert('Debes escribir el nombre del titular de la cuenta');
+        $('html,body').animate({scrollTop: Number(name.offset().top-100)});
+        name.focus();
+      }
+    } else {
+      alert('Debes seleccionar el banco');
+      $('html,body').animate({scrollTop: Number(bank.offset().top-100)});
+      bank.focus();
+    }
+
+  }
+
+  // Serialize form Array to Object
+  function form_array_to_object(a) {
+    var o = {};
+    $.each(a, function() {
+      if (o[this.name] !== undefined) {
+        if (!o[this.name].push) {
+          o[this.name] = [o[this.name]];
+        }
+        o[this.name].push(this.value || '');
+      } else {
+        o[this.name] = this.value || '';
+      }
+    });
+    return o;
+  };
