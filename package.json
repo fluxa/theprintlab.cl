@@ -1,0 +1,14 @@
+{
+  "name": "theprintlab.cl",
+  "version": "1.0.0",
+  "description": "Harp powered theprintlab.cl",
+  "dependencies": {
+    "harp": "*"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": "5.x.x",
+    "npm": "3.x.x"
+  }
+}

@@ -9,9 +9,13 @@ nav.navbar.navbar-fixed-top.navbar-inverse(role='navigation')
 				span.icon-bar
 				span.icon-bar
 
-		.collapse.navbar-collapse#navbar-collapse
+		.collapse.navbar-collapse.navbar-right#navbar-collapse
 			ul.nav.navbar-nav
-				li.active
-					a(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4',target='_blank') DESCARGAR
-				li
-					a(href='#print') IMPRESIONES
+				each item in public._data.navigation
+					if item.active
+						li.active
+							a(href='#{item.url}') #{item.title}
+					else
+						li
+							a(href='#{item.url}') #{item.title}
+							

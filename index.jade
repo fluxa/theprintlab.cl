@@ -32,7 +32,7 @@
 		span PRUEBA NUESTRA APP, BÁJALA YA!
 	a.app-link(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4')
 			img(src='./public/images/appstore_badge_gray.svg')
-	a(name='print')
+	a(name='info')
 
 .container-fluid.tpl-cont-pri
 	.tpl-logo-bg.visible-sm
@@ -48,9 +48,36 @@
 	a(href='https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4')
 			.appstore-badge
 != partial('_footer')
+//- script(src='/public/js/jquery-1.12.0.min.js')
 != partial('_scripts')
 script.
-	$(function(){
+	
+	var waitForFinalEvent=function(){var b={};return function(c,d,a){a||(a="I am a banana!");b[a]&&clearTimeout(b[a]);b[a]=setTimeout(c,d)}}();
+	var fullDateString = new Date();
+	
+	function getSwipeID() {
+		var a = '#swipe-desktop';
+		var b = '#swipe-mobile';
+		if ($(a).is(':visible')) {
+			return a;
+		}
+		if ($(b).is(':visible')) {
+			return b;
+		}
+	}
+	
+	function initSwipe(elID) {
+		
+		if(window.my_swipe) {
+			if(window.my_swipe.currentElID === elID) {
+				return;
+			} else {
+				window.my_swipe.stop();
+				window.my_swipe = null;
+				console.log('another instance has been stopeed');
+			}
+		}
+	
 		var swipe_pos = $('.swipe-counter > ul > li');
 		var swipe_options = function() {
 			return {
@@ -69,18 +96,25 @@ script.
 				transitionEnd: function(index, elem) {}
 			}
 		}
-
-		if($('#swipe-desktop').is(':visible')) {
-			window.my_swipe = $('#swipe-desktop').Swipe(swipe_options()).data('Swipe');
-		} else {
-			window.my_swipe = $('#swipe-mobile').Swipe(swipe_options()).data('Swipe');
-		}
-
-
+		
+		window.my_swipe = $(elID).Swipe(swipe_options()).data('Swipe');
+		window.my_swipe.currentElID = elID;
+		
 		swipe_pos.on('click', function(event){
 			event.preventDefault();
 			var index = swipe_pos.index(event.currentTarget);
 			window.my_swipe.slide(index);
 		});
-
+	}
+	
+	$(window).resize(function () {
+		waitForFinalEvent(function(){
+			var swipeID = getSwipeID();
+			initSwipe(swipeID);
+		}, 300, fullDateString.getTime())
+	});
+	
+	$(function(){
+		var swipeID = getSwipeID();
+		initSwipe(swipeID);
 	});

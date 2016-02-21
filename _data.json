@@ -1,9 +1,17 @@
 {
+	"navigation": [
+		{"title":"DESCARGAR APP", "url":"https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4","active":true},
+		{"title":"PRODUCTOS", "url":"/products"},
+		{"title":"INFO", "url":"#info"}
+	],
 	"title": "ThePrintlab",
 	"index": {
 		"main_text": "LA FORMA MÁS SENCILLA DE IMPRIMIR TUS FOTOS DESDE TU IPHONE Y RECIBIRLAS POR CORREO IMPRESAS EN PAPEL FOTOGRÁFICO EN LA PUERTA DE TU CASA",
 		"info_text": "USAMOS PAPEL FOTOGRÁFICO PROFESIONAL CON UN PERFECTO TERMINADO EN MATTE Y BORDE BLANCO. EL TAMAÑO DE LAS IMPRESIONES ES DE 10x15 CMS PARA FOTOS RECTANGULARES Y 10x10 CMS PARA FOTOS CUADRADAS DE INSTAGRAM. TE VAN A ENCANTAR TUS IMPRESIONES!!",
 		"smartbanner": true
+	},
+	"products":{
+
 	},
 	"punch":"THE PRINTLAB | IMPRIME FOTOS DESDE TU SMARTPHONE",
 	"bktrans": {
@@ -22,5 +30,9 @@
 			"BANCO INTERNACIONAL",
 			"SCOTIABANK"
 		]
-	}
+	},
+	"prods": [
+		{"id":"prod_01","title":"Cuadradas","image":"prod_01.jpg"},
+		{"id":"prod_02","title":"Rectangulares","image":"prod_02.jpg"}
+	]
 }
