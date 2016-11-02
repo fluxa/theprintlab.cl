@@ -15,6 +15,9 @@ nav.navbar.navbar-fixed-top.navbar-inverse(role='navigation')
 					if item.active
 						li.active
 							a(href='#{item.url}') #{item.title}
+					else if item.modal
+						li
+							a(href='#{item.url}', data-toggle='modal', data-target='#myModal') #{item.title}
 					else
 						li
 							a(href='#{item.url}') #{item.title}
