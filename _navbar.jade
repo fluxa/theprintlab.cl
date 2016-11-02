@@ -13,10 +13,10 @@ nav.navbar.navbar-fixed-top.navbar-inverse(role='navigation')
 			ul.nav.navbar-nav
 				each item in public._data.navigation
 					if item.active
-						li.active
+						li
 							a(href='#{item.url}') #{item.title}
 					else if item.modal
-						li
+						li.active
 							a(href='#{item.url}', data-toggle='modal', data-target='#modalApp', data-keyboard='false', data-backdrop='static') #{item.title}
 					else
 						li
