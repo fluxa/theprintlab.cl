@@ -33,6 +33,14 @@ script.
       }
     });
 
+    $("#modalApp .modal-body iframe").load(function () {
+      $("#modalApp .modal-body iframe").css({"height": "0px"});
+      setTimeout(function () {
+        var h = $(window).height() - 200;
+        $("#modalApp .modal-body iframe").css({"height": h + "px"});
+      }, 50);
+    });
+
 
   });
 
