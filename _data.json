@@ -3,7 +3,7 @@
 		{"title":"DESCARGAR APP", "url":"https://itunes.apple.com/cl/app/printlab-imprime-fotos-desde/id670160214?mt=8&uo=4","active":true},
 		{"title":"PRODUCTOS", "url":"/products"},
 		{"title":"INFO", "url":"#info"},
-		{"title":"IMPRIME TUS FOTOS AQUÍ", "url":"#","modal":true}
+		{"title":"IMPRIME TUS FOTOS AQUÍ", "url":"http://app-theprintlab.herokuapp.com","modal":true}
 	],
 	"title": "ThePrintlab",
 	"index": {
